@@ -1,4 +1,3 @@
-wake up
 get up
 brush teeth
 drink water
@@ -8,3 +7,4 @@ have clones make a farm
 buy plants
 harvest the groceries
 clean the veggies
+prep the veggies
