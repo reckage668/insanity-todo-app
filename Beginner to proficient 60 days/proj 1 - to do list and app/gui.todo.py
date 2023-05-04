@@ -4,15 +4,17 @@ import time
 
 sg.theme("DarkGreen 1")
 
-#now = time.strftime("%H:%M:%S %d%b%Y")
+# now = time.strftime("%H:%M:%S %d%b%Y")
 clock = sg.Text('', key='clock')
 label = sg.Text("Type in a task to do.")
 input_box = sg.InputText(tooltip="Enter a to do", key="todo")
-add_button = sg.Button("Add")
+add_button = sg.Button(image_source="add.png", mouseover_colors="LightBlue2",
+                       tooltip="Add Task", key="Add")
 list_box = sg.Listbox(values=functions.get_todos(), key="todos",
                       enable_events=True, size=[45, 10])
 edit_button = sg.Button("Edit")
-complete_button = sg.Button("Complete")
+complete_button = sg.Button(image_source="complete.png", mouseover_colors="LightBlue2",
+                            tooltip="Complete a task.", key="Complete")
 exit_button = sg.Button("Exit")
 
 
@@ -34,6 +36,7 @@ while True:
             new_todo = values['todo'] + "\n"
             todos.append(new_todo)
             functions.write_todos(todos)
+            window['todos'].update(values=todos)
         case "Edit":
             try:
                 todo_to_change = values['todos'][0]
@@ -45,7 +48,7 @@ while True:
                 window['todos'].update(values=todos)
             except IndexError:
                 sg.popup("Select an item to change first.", font=("Garamond", 16))
-        case 'Complete':
+        case "Complete":
             try:
                 todo_to_complete = values['todos'][0]
                 todos = functions.get_todos()
@@ -55,7 +58,7 @@ while True:
                 window['todo'].update(value='')
             except IndexError:
                 sg.popup("Select an item to complete first.", font=("Garamond", 16))
-        case 'todos':
+        case "todos":
             window['todo'].update(value= values['todos'][0])
         case "Exit":
             break
